@@ -10,11 +10,12 @@ async function run(config,{fail=false}={}) {
 (async()=>{
  let n=await run({repositoryUrl:null,repositoryRef:null});assert.equal(n['source-action'].hidden,true);
  n=await run({repositoryUrl:'https://example.invalid/source',repositoryRef:'a'.repeat(40),correspondingSourceReviewed:true,reconstructionVerified:true,userAccessVerified:true});assert.equal(n['source-status'].hidden,true);assert.equal(n['source-link'].href,'https://example.invalid/source/tree/'+'a'.repeat(40));assert.equal(n['source-action'].hidden,false);
- n=await run({repositoryUrl:'https://example.invalid/source',repositoryRef:'a'.repeat(40),correspondingSourceReviewed:true,reconstructionVerified:false,userAccessVerified:false});assert.equal(n['source-action'].hidden,true);assert.match(n['source-status'].textContent,/aguarda validação/);
+ n=await run({repositoryUrl:'https://example.invalid/source',repositoryRef:'a'.repeat(40),correspondingSourceReviewed:true,reconstructionVerified:false,userAccessVerified:false});assert.equal(n['source-action'].hidden,false);
+ n=await run({repositoryUrl:'https://example.invalid/source',repositoryRef:'a'.repeat(40),correspondingSourceReviewed:false});assert.equal(n['source-action'].hidden,true);assert.match(n['source-status'].textContent,/aguarda revisão/);
  n=await run({repositoryUrl:'javascript:void(0)',repositoryRef:'a'.repeat(40)});assert.equal(n['source-action'].hidden,true);
  const url=new URL('https://example.invalid/source');url.username='usuario-de-teste';url.password='valor-ficticio';
  n=await run({repositoryUrl:url.href,repositoryRef:'a'.repeat(40)});assert.equal(n['source-action'].hidden,true);
  n=await run({repositoryUrl:'https://example.invalid/source',repositoryRef:'main'});assert.equal(n['source-action'].hidden,true);
  n=await run({}, {fail:true});assert.equal(n['source-action'].hidden,true);assert.match(n['source-status'].textContent,/Não foi possível/);
- console.log('PASS: 7 cenários do link de código (pendente, válido, validações, protocolo, credenciais, referência e indisponibilidade).');
+ console.log('PASS: 8 cenários do link de código; oferta independente da validação completa da reconstrução.');
 })().catch(error=>{console.error(error.message);process.exitCode=1;});

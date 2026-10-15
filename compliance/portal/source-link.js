@@ -10,13 +10,13 @@
       if(!config.repositoryUrl || !config.repositoryRef) return;
       const url=new URL(config.repositoryUrl);
       if(url.protocol!=='https:' || url.username || url.password || !/^[a-f0-9]{40,64}$/i.test(config.repositoryRef)) return;
-      if(!config.correspondingSourceReviewed || !config.reconstructionVerified || !config.userAccessVerified) {
-        status.textContent='A oferta de código aguarda validação da reconstrução e do acesso dos usuários. Esta página é uma preparação para revisão.';
+      if(config.correspondingSourceReviewed !== true) {
+        status.textContent='A referência do código-fonte aguarda revisão.';
         return;
       }
       link.href=url.href.replace(/\/$/,'')+'/tree/'+config.repositoryRef; reference.textContent='Referência desta versão: '+config.repositoryRef;
       action.hidden=false; status.hidden=true;
     })
-    .catch(()=>{status.textContent='Não foi possível consultar a oferta de código. O endereço do repositório permanece A CONFIRMAR nesta revisão.';})
+    .catch(()=>{status.textContent='Não foi possível consultar a versão do código-fonte. Recarregue esta página para tentar novamente.';})
     .finally(()=>clearTimeout(timer));
 })();

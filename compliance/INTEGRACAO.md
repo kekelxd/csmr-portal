@@ -1,9 +1,13 @@
-# Integração proposta, não aplicada
+# Integração ativa — 15/10/2026
 
-O patch foi regenerado contra os arquivos atuais, com cabeçalhos de licença e caminhos da publicação. Propõe montar compliance/portal somente leitura em /sobre-e-licencas/ e incluir rodapé no HTML servido pelo nginx. Não muda autenticação ou permissões. git apply --check valida somente a aplicabilidade textual.
+Aplicação autorizada pelo responsável. O backup privado foi realizado antes das mudanças. Somente nginx foi recriado; Rails, banco, scheduler e websocket não foram reiniciados pela integração.
 
-A mesma substituição HTML pode atingir login, cadastro, formulário nativo de cliente e painel; cobertura visual e interação nas telas reais ainda A CONFIRMAR. O CSS anterior reserva espaço no layout e tem tratamento móvel; não há prova de ausência de regressões em todas as telas. Formulário público anônimo incorporado a outro site exige link na página hospedeira e não é coberto automaticamente.
+O template original contrib/nginx/zammad.conf é preservado em theme/csmr-nginx.conf, com uma única inclusão de localização estática no server. O entrypoint oficial continua responsável por resolver os serviços e gerar a configuração. A montagem é somente leitura. Reavalie o template contra o upstream ao atualizar a aplicação.
 
-Não aplique sem validar o fluxo completo em cópia descartável, inclusive teclado e tela estreita. A página estática teve validação isolada anterior, insuficiente para declarar cobertura integrada. reconstructionVerified permanece falso.
+A localização exclusiva /sobre-e-licencas/ serve apenas os arquivos selecionados de compliance/portal. Autoindex desabilitado; cache no-store; as injeções globais do aplicativo são substituídas por filtro identidade nessa página. Rotas de API, websocket e autenticação permanecem nativas. O rodapé abre nova aba para preservar a edição. CSS reserva 40px e posiciona o rodapé no rodapé da viewport móvel.
 
-URL planejada: https://github.com/kekelxd/csmr-portal ; tag v1.0-7.2.2. tools/preparar-oferta.py gera o hash imutável após a tag, fora do Git. Configuração da instalação real deve corresponder ao código efetivamente implantado; não anunciar a nova tag antes da revisão e implantação correspondente.
+integracao-proposta.patch é agora registro da diferença aplicada em relação ao commit f457f432. git apply --reverse --check valida a correspondência; não reaplicar esse patch sobre os arquivos já integrados. O patch do grupo em propostas/ permanece separado e não aplicado.
+
+A oferta pública do código usa o commit revisado e publicado, mesmo enquanto a reconstrução completa segue pendente. Indicadores de auditoria não são apresentados como certificação jurídica. userAccessVerified continua falso até confirmação do responsável sobre acesso dos usuários externos.
+
+Conferidos: painel e formulário de operador, página estática em desktop/tela estreita. Sessão específica de cliente e reconstrução integral continuam A CONFIRMAR. Formulários incorporados a sites externos exigem link na página hospedeira.

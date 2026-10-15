@@ -23,19 +23,25 @@ for name in ['NOTICE.md', 'CHANGELOG-MODIFICACOES.md', 'README.md', 'RECONSTRUCA
     if not (root/name).is_file(): errors.append('Ausente: '+name)
 for item in json.loads((root/'evidencias/cabecalhos-comentarios.json').read_text())['files']:
     path = root/Path(item['path']).relative_to('local')
-    if sha(path) != item['after_sha256']: errors.append('Fonte correspondente divergente: '+str(path.relative_to(root)))
-    if hashlib.sha256(path.read_bytes()[item['header_bytes']:]).hexdigest() != item['before_sha256']:
+    # This evidence describes the earlier comment-only revision, not later deployment changes.
+    historical = git('show', 'f457f432e832fd1779410983abbd12d5121a4124:'+str(path.relative_to(root)))
+    if hashlib.sha256(historical).hexdigest() != item['after_sha256']: errors.append('Evidência histórica divergente: '+str(path.relative_to(root)))
+    if hashlib.sha256(historical[item['header_bytes']:]).hexdigest() != item['before_sha256']:
         errors.append('Alteração além do cabeçalho: '+str(path.relative_to(root)))
-check = subprocess.run(['git', '-c', 'safe.directory='+str(root), '-C', str(root), 'apply', '--check', str(root/'compliance/integracao-proposta.patch')], capture_output=True)
-if check.returncode: errors.append('Patch de rodapé não aplicável')
+deployment = root/'evidencias/integracao-ativa.json'
+if deployment.exists():
+    for name, digest in json.loads(deployment.read_text()).get('runtime_sources_sha256', {}).items():
+        if sha(root/name) != digest: errors.append('Fonte implantada divergente: '+name)
+check = subprocess.run(['git', '-c', 'safe.directory='+str(root), '-C', str(root), 'apply', '--check', '--reverse', str(root/'compliance/integracao-proposta.patch')], capture_output=True)
+if check.returncode: errors.append('Integração ativa diverge do patch documentado')
 check = subprocess.run(['git', '-c', 'safe.directory='+str(root), '-C', str(root), 'apply', '--check', str(root/'propostas/grupo-por-nome.patch')], capture_output=True)
 if check.returncode: errors.append('Patch do grupo não aplicável')
 config_path = root/'.build/source-config.json'
 config = json.loads((config_path if config_path.exists() else root/'compliance/portal/source-config.json').read_text())
 ref = config.get('repositoryRef')
 if not ref or not re.fullmatch('[a-f0-9]{40}', ref): pending.append('Referência imutável ainda não gerada')
-elif git('rev-parse', 'v1.0-7.2.2^{commit}').decode().strip() != ref: errors.append('Hash diferente da tag')
-for flag, message in [('correspondingSourceReviewed', 'Revisão das fontes'), ('reconstructionVerified', 'Reconstrução completa e rodapé nas telas reais'), ('userAccessVerified', 'Acesso externo ao repositório')]:
+elif git('rev-parse', 'HEAD').decode().strip() != ref: errors.append('Hash diferente do código atualmente revisado')
+for flag, message in [('correspondingSourceReviewed', 'Revisão das fontes'), ('reconstructionVerified', 'Reconstrução integral'), ('userAccessVerified', 'Acesso externo ao repositório')]:
     if config.get(flag) is not True: pending.append(message+': A CONFIRMAR')
 if config.get('observedRepositoryVisibility') != 'public': pending.append('Repositório público: A CONFIRMAR')
 # High-confidence patterns only. Findings never include matching values.

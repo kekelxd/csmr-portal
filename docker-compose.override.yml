@@ -1,6 +1,9 @@
 services:
   zammad-nginx:
     volumes:
+      - ./theme/csmr-nginx.conf:/opt/zammad/contrib/nginx/zammad.conf:ro
+      - ./theme/csmr-licenses-location.conf:/etc/nginx/csmr-licenses-location.conf:ro
+      - ./compliance/portal:/opt/zammad/public/sobre-e-licencas:ro
       - ./theme/csmr-form.js:/opt/zammad/public/assets/csmr-form.js:ro
       - ./theme/csmr-form.css:/opt/zammad/public/assets/csmr-form.css:ro
       - ./theme/csmr-theme.css:/opt/zammad/public/assets/csmr-theme.css:ro

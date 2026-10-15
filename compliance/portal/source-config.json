@@ -1,13 +1,13 @@
 {
   "repositoryUrl": "https://github.com/kekelxd/csmr-portal",
   "repositoryRef": null,
-  "status": "Preparação local; publicação, reconstrução completa e integração pendentes",
+  "status": "Integração ativa; código correspondente publicado por commit; reconstrução completa ainda pendente",
   "correspondingSourceReviewed": true,
   "reconstructionVerified": false,
-  "repositoryVisibility": "private",
+  "repositoryVisibility": "public",
   "userAccessVerified": false,
-  "observedRepositoryVisibility": "private",
-  "repositoryTag": "v1.0-7.2.2",
-  "observedRepositoryUrl": "https://github.com/kekelxd/zammadcsmr",
-  "repositoryRenamePending": true
+  "observedRepositoryVisibility": "public",
+  "repositoryTag": null,
+  "observedRepositoryUrl": "https://github.com/kekelxd/csmr-portal",
+  "repositoryRenamePending": false
 }

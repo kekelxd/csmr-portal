@@ -1,0 +1,14 @@
+{
+  "profile": "product-admin",
+  "sourceRoots": [
+    "portal"
+  ],
+  "locale": "pt-BR",
+  "canonicalMap": "UX-CONTRACT.md",
+  "requiredCapabilities": [
+    "Scrollbar"
+  ],
+  "requiredCommands": [],
+  "commands": {},
+  "evidence": {}
+}

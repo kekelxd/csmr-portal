@@ -8,6 +8,6 @@ Este portal é uma versão modificada. Copyright das adições próprias: SLG Co
 
 Primeira modificação: 14/10/2026, data declarada pelo responsável; comprovação e autoria histórica no Git: A CONFIRMAR. Áreas modificadas: formulário/validações, painel, tema/CSS/ícones, confirmação por e-mail e regras nativas. Commits deste repositório documentam a preparação atual; não comprovam datas históricas.
 
-A oferta planejada usa https://github.com/kekelxd/csmr-portal na tag v1.0-7.2.2. Referência imutável gerada após a tag, fora do conteúdo versionado, por tools/preparar-oferta.py. Acesso público A CONFIRMAR. Não anunciar conformidade concluída enquanto reconstrução, oferta e integração não tiverem evidências.
+A oferta de código usa https://github.com/kekelxd/csmr-portal na tag v1.0-7.2.2. Referência imutável gerada após a tag, fora do conteúdo versionado, por tools/preparar-oferta.py. Repositório público observado e integração do rodapé autorizada em 15/10/2026. A tag v1.0-7.2.2 preserva a preparação inicial; o hash atual é gerado após o commit da integração. Reconstrução integral e confirmação de acesso pelos usuários externos permanecem A CONFIRMAR.
 
 Marca SMART declarada pelo responsável: theme/MARCA.md. A AGPL não concede direitos de marca. Nomes técnicos Docker e referências descritivas ao upstream permanecem.

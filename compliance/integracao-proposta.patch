@@ -8,15 +8,140 @@
 +sub_filter '</head>' '<link rel="stylesheet" href="/assets/csmr-theme.css?v=2"><link rel="stylesheet" href="/sobre-e-licencas/footer.css"><link rel="icon" type="image/png" sizes="192x192" href="/assets/csmr-icon.png?v=2"><link rel="stylesheet" href="/assets/csmr-operations.css?v=2"><script defer src="/assets/csmr-operations.js?v=2"></script><link rel="stylesheet" href="/assets/csmr-form.css?v=5"><script defer src="/assets/csmr-form.js?v=6"></script></head>';
  sub_filter_once on;
 +
-+# Proposed only: attribution link in full HTML application pages.
++# Shared attribution link in full HTML application pages.
 +sub_filter '</body>' '<footer class="smart-license-footer"><a href="/sobre-e-licencas/" target="_blank" rel="noopener">Sobre e licenças</a></footer></body>';
 --- a/docker-compose.override.yml
 +++ b/docker-compose.override.yml
-@@ -1,6 +1,7 @@
+@@ -1,6 +1,9 @@
  services:
    zammad-nginx:
      volumes:
++      - ./theme/csmr-nginx.conf:/opt/zammad/contrib/nginx/zammad.conf:ro
++      - ./theme/csmr-licenses-location.conf:/etc/nginx/csmr-licenses-location.conf:ro
 +      - ./compliance/portal:/opt/zammad/public/sobre-e-licencas:ro
        - ./theme/csmr-form.js:/opt/zammad/public/assets/csmr-form.js:ro
        - ./theme/csmr-form.css:/opt/zammad/public/assets/csmr-form.css:ro
        - ./theme/csmr-theme.css:/opt/zammad/public/assets/csmr-theme.css:ro
+--- /dev/null
++++ b/theme/csmr-nginx.conf
+@@ -0,0 +1,101 @@
++# Copyright (C) 2026 SLG Comércio de Sistemas de Automação Predial Ltda
++# SPDX-License-Identifier: AGPL-3.0-only
++# Based on Zammad 7.2.2 contrib/nginx/zammad.conf, original text preserved below.
++# Modification 2026-10-15: include the isolated static licenses location.
++# WITHOUT ANY WARRANTY.
++#
++# this is an example nginx config for Zammad
++# Please visit https://docs.zammad.org for further input on how to configure
++# your nginx to work with Zammad
++#
++# This is a NON SSL configuration, DO NOT use in production!
++#
++
++upstream zammad-railsserver {
++  server 127.0.0.1:3000;
++}
++
++upstream zammad-websocket {
++  server 127.0.0.1:6042;
++}
++
++server {
++  listen 80;
++  listen [::]:80;
++
++  # replace 'localhost' with your fqdn if you want to use zammad from remote
++  server_name localhost;
++
++  # security - prevent information disclosure about server version
++  server_tokens off;
++
++  root /opt/zammad/public;
++
++  # SMART/CSMR static source-attribution page; native routes below stay unchanged.
++  include /etc/nginx/csmr-licenses-location.conf;
++
++  access_log /var/log/nginx/zammad.access.log;
++  error_log  /var/log/nginx/zammad.error.log;
++
++  client_max_body_size 50M;
++
++  location ~ ^/(assets/|robots.txt|humans.txt|favicon.ico|apple-touch-icon.png) {
++    expires max;
++  }
++
++  # legacy web socket server
++  location /ws {
++    proxy_http_version 1.1;
++    proxy_set_header Upgrade $http_upgrade;
++    proxy_set_header Connection "Upgrade";
++    proxy_set_header Host $http_host;
++    proxy_set_header CLIENT_IP $remote_addr;
++    proxy_set_header X-Forwarded-For $proxy_add_x_forwarded_for;
++    proxy_set_header X-Forwarded-Proto $scheme;
++    # Prevent an outer proxy from overriding the scheme set above.
++    proxy_set_header Forwarded "";
++    proxy_set_header X-Forwarded-Scheme "";
++    proxy_set_header X-Forwarded-Ssl "";
++    proxy_read_timeout 86400;
++    proxy_pass http://zammad-websocket;
++  }
++
++  # action cable
++  location /cable {
++    proxy_http_version 1.1;
++    proxy_set_header Upgrade $http_upgrade;
++    proxy_set_header Connection "Upgrade";
++    proxy_set_header Host $http_host;
++    proxy_set_header CLIENT_IP $remote_addr;
++    proxy_set_header X-Forwarded-For $proxy_add_x_forwarded_for;
++    proxy_set_header X-Forwarded-Proto $scheme;
++    # Prevent an outer proxy from overriding the scheme set above.
++    proxy_set_header Forwarded "";
++    proxy_set_header X-Forwarded-Scheme "";
++    proxy_set_header X-Forwarded-Ssl "";
++    proxy_read_timeout 86400;
++    proxy_pass http://zammad-railsserver;
++  }
++
++  location / {
++    proxy_http_version 1.1;
++    proxy_set_header Host $http_host;
++    proxy_set_header CLIENT_IP $remote_addr;
++    proxy_set_header X-Forwarded-For $proxy_add_x_forwarded_for;
++    proxy_set_header X-Forwarded-Proto $scheme;
++    # Prevent an outer proxy from overriding the scheme set above.
++    proxy_set_header Forwarded "";
++    proxy_set_header X-Forwarded-Scheme "";
++    proxy_set_header X-Forwarded-Ssl "";
++
++    # Change this line in an SSO setup
++    proxy_set_header X-Forwarded-User "";
++
++    proxy_read_timeout 300;
++    proxy_pass http://zammad-railsserver;
++
++    gzip on;
++    gzip_types text/plain text/xml text/css image/svg+xml application/javascript application/x-javascript application/json application/xml;
++    gzip_proxied any;
++  }
++}
+--- /dev/null
++++ b/theme/csmr-licenses-location.conf
+@@ -0,0 +1,16 @@
++# Copyright (C) 2026 SLG Comércio de Sistemas de Automação Predial Ltda
++# SPDX-License-Identifier: AGPL-3.0-only
++# Added 2026-10-15. WITHOUT ANY WARRANTY.
++location = /sobre-e-licencas { return 302 /sobre-e-licencas/; }
++location ^~ /sobre-e-licencas/ {
++  root /opt/zammad/public;
++  index index.html;
++  autoindex off;
++  try_files $uri $uri/ =404;
++  add_header Cache-Control "no-store" always;
++  etag off;
++  # Defining a local identity filter overrides inherited application injections.
++  # The static page owns its stylesheet, scripts and footer.
++  sub_filter '</head>' '</head>';
++  sub_filter_once on;
++}

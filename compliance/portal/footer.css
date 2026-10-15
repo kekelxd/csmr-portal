@@ -3,5 +3,8 @@ body:has(> .smart-license-footer) { --smart-license-footer-height:40px; }
 body:has(> .smart-license-footer) > #app { min-height:0; }
 .smart-license-footer { box-sizing:border-box; flex:0 0 var(--smart-license-footer-height,40px); min-height:40px; display:flex; align-items:center; justify-content:center; padding:8px 14px; background:var(--background-primary,#11151c); border-top:1px solid var(--border,#465161); color:var(--text-muted,#aeb9c8); font:13px/1.4 'Fira Sans','Segoe UI',Arial,sans-serif; }
 .smart-license-footer a { color:var(--text-link,#ff8e96); text-decoration:underline; text-underline-offset:3px; cursor:pointer; }.smart-license-footer a:hover { text-decoration-thickness:2px; }.smart-license-footer a:focus-visible { outline:2px solid currentColor; outline-offset:4px; }
-@media(max-width:767px) { body:has(> .smart-license-footer) > #app { height:calc(100% - var(--smart-license-footer-height)); } }
+@media(max-width:767px) {
+  body:has(> .smart-license-footer) > #app { height:calc(100% - var(--smart-license-footer-height)); }
+  .smart-license-footer { position:fixed; inset:auto 0 0; z-index:1; }
+}
 @media print { .smart-license-footer { display:none; } body:has(> .smart-license-footer) > #app { height:auto; } }
