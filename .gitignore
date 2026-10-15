@@ -1,0 +1,12 @@
+# Runtime and confidential material must never enter this repository.
+.env
+.env.*
+!.env.example
+.build/
+*.sql
+*.dump
+*.log
+backups/
+storage/
+uploads/
+node_modules/
