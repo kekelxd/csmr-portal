@@ -1,0 +1,51 @@
+/*
+This file is part of the SMART/CSMR support portal, based on Zammad 7.2.2.
+Copyright (C) 2026 SLG Comércio de Sistemas de Automação Predial Ltda
+Upstream: https://github.com/zammad/zammad/tree/7.2.2
+
+This program is free software: you can redistribute it and/or modify it
+under the terms of the GNU Affero General Public License, version 3,
+as published by the Free Software Foundation. See LICENSE.
+This program is distributed WITHOUT ANY WARRANTY; without even the implied
+warranty of MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.
+
+Modification notice: license header added on 2026-10-15.
+Earlier modifications dated 2026-10-14 and 2026-10-15 were declared by
+ the maintainer; historical Git dates are unconfirmed.
+See CHANGELOG-MODIFICACOES.md.
+*/
+/* Shared layout for native customer and operator creation forms. */
+form.ticket-create.csmr-ticket-form { display: grid; grid-template-columns: minmax(0, 1fr); gap: 20px; }
+.csmr-ticket-form > .ticket-form-top,
+.csmr-ticket-form > .article-form-top,
+.csmr-ticket-form > .formset-inset,
+.csmr-ticket-form .ticket-form-middle,
+.csmr-ticket-form .ticket-form-bottom { display: contents; }
+.csmr-ticket-form .form-group { min-width: 0; width: 100%; max-width: 100%; margin: 0; float: none; flex: none; order: 80; box-sizing: border-box; }
+.csmr-ticket-form .formGroup-label { min-width: 0; }
+.csmr-ticket-form .formGroup-label > label { display: block; margin-bottom: 8px; white-space: normal; line-height: 1.5; }
+.csmr-ticket-form .form-control { max-width: 100%; box-sizing: border-box; }
+.csmr-ticket-form textarea { width: 100%; min-height: 110px; resize: vertical; }
+.csmr-ticket-form [data-attribute-name="title"] { order: 10; }
+.csmr-ticket-form [data-attribute-name="customer_id"] { order: 20; }
+.csmr-ticket-form [data-attribute-name="csmr_categoria"] { order: 30; }
+.csmr-ticket-form [data-attribute-name="body"] { order: 60; }
+.csmr-ticket-form [data-attribute-name="csmr_tipo_temperatura"] { order: 50; }
+.csmr-ticket-form [data-attribute-name="csmr_setpoint"] { order: 51; }
+.csmr-ticket-form [data-attribute-name="csmr_descricao_iluminacao"],
+.csmr-ticket-form [data-attribute-name="csmr_descricao_programacao"] { order: 52; }
+.csmr-ticket-form [data-attribute-name="csmr_local"] { order: 53; }
+.csmr-ticket-form [data-attribute-name="csmr_observacoes"] { display: none !important; }
+.csmr-ticket-form > .form-controls { order: 100; }
+.csmr-customer-form [data-attribute-name="group_id"],
+.csmr-customer-form [data-attribute-name="state_id"],
+.csmr-customer-form [data-attribute-name="organization_id"],
+.csmr-ticket-form [hidden] { display: none !important; }
+.csmr-ticket-form [data-name="body"] { min-height: 100px; }
+
+/* CSMR labels use sentence case and persistent guidance instead of icon-only tips. */
+.csmr-ticket-form .formGroup-label > label { text-transform: none !important; font-size: 14px; font-weight: 600; letter-spacing: normal; margin-bottom: 8px; }
+.csmr-ticket-form .csmr-field-help { margin: 7px 0 0; font-size: 13px; line-height: 1.5; color: var(--text-muted, #aeb9c8); }
+.csmr-ticket-form [data-attribute-name="csmr_setpoint"] .js-helpMessage,
+.csmr-ticket-form [data-attribute-name="csmr_local"] .js-helpMessage,
+.csmr-ticket-form [data-attribute-name="csmr_tipo_temperatura"] .js-helpMessage { display: none; }

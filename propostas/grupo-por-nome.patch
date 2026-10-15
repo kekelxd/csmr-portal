@@ -1,0 +1,30 @@
+--- a/forms/csmr_portal.rb
++++ b/forms/csmr_portal.rb
+@@ -16,6 +16,9 @@
+ require 'bigdecimal'
+ module CsmrPortalForm
+   CATEGORIES = {'temperatura'=>'Ajuste de Temperatura','iluminacao'=>'Ajuste de Iluminação','programacao'=>'Programação Horária','outros'=>'Outros'}.freeze
++  def self.destination_group_id
++    Group.find_by!(name: ENV.fetch('CSMR_GROUP_NAME', 'CSMR - Atendimento')).id
++  end
+   AVAILABLE_CATEGORIES = %w[temperatura outros].freeze
+   EXCLUSIVE = %w[csmr_tipo_temperatura csmr_setpoint csmr_descricao_iluminacao csmr_descricao_programacao].freeze
+   VISIBLE = {'temperatura'=>%w[csmr_tipo_temperatura csmr_setpoint], 'iluminacao'=>%w[csmr_descricao_iluminacao], 'programacao'=>%w[csmr_descricao_programacao], 'outros'=>[]}.freeze
+@@ -34,7 +37,7 @@
+         self.csmr_setpoint=BigDecimal(value).to_s('F') if value.match?(/\A[+-]?\d+(?:\.\d+)?\z/)
+       end
+       return unless new_record?
+-      self.group_id=2
++      self.group_id=CsmrPortalForm.destination_group_id
+       self.state_id=1
+       actor=UserInfo.current_user
+       self.organization_id=actor.organization_id if actor && !actor.permissions?('ticket.agent') && actor.id==customer_id
+@@ -75,7 +78,7 @@
+         return
+       end
+       return unless CATEGORIES.key?(category)
+-      params[:group_id]=2
++      params[:group_id]=CsmrPortalForm.destination_group_id
+       params[:state_id]=1
+       params[:organization_id]=current_user.organization_id if customer
+       return if category=='outros'
