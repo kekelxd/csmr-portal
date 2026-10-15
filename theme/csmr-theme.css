@@ -1,0 +1,132 @@
+/*
+This file is part of the SMART/CSMR support portal, based on Zammad 7.2.2.
+Copyright (C) 2026 SLG Comércio de Sistemas de Automação Predial Ltda
+Upstream: https://github.com/zammad/zammad/tree/7.2.2
+
+This program is free software: you can redistribute it and/or modify it
+under the terms of the GNU Affero General Public License, version 3,
+as published by the Free Software Foundation. See LICENSE.
+This program is distributed WITHOUT ANY WARRANTY; without even the implied
+warranty of MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.
+
+Modification notice: license header added on 2026-10-15.
+Earlier modifications dated 2026-10-14 and 2026-10-15 were declared by
+ the maintainer; historical Git dates are unconfirmed.
+See CHANGELOG-MODIFICACOES.md.
+*/
+/* SMART / CSMR skin v1. Native Zammad controls and state colors remain canonical. */
+:root, html[data-theme] {
+  color-scheme: dark;
+  --csmr-brand: #b92334;
+  --csmr-brand-hover: #9c1d2c;
+  --csmr-focus: #ff8e96;
+  --csmr-canvas: #11151c;
+  --csmr-panel: #1c232e;
+  --csmr-line: #354151;
+  --button-primary-text: #ffffff;
+  --button-primary-background: var(--csmr-brand);
+  --button-primary-background-active: var(--csmr-brand-hover);
+  --header-primary: #f4f6fa;
+  --header-secondary: #c2cad6;
+  --text-normal: #e4e9f1;
+  --text-muted: #aeb9c8;
+  --text-muted-alt: #aeb9c8;
+  --text-link: #ff9ca4;
+  --text-nav: #e4e9f1;
+  --text-inverted: #ffffff;
+  --text-active: #ffffff;
+  --highlight: var(--csmr-brand);
+  --interactive-primary: #f4f6fa;
+  --interactive-muted: #abb7c8;
+  --interactive-muted-active: #c2cad6;
+  --interactive-muted-alt: #8795a8;
+  --interactive-muted-alt-selected: #dce4ef;
+  --background-primary: var(--csmr-canvas);
+  --background-primary-alt: #171d27;
+  --background-secondary: var(--csmr-panel);
+  --background-secondary-hover: #252f3e;
+  --background-tertiary: #171d27;
+  --background-quaternary: #0d1118;
+  --background-quaternary-alt: #263141;
+  --background-popover: #263141;
+  --background-active: var(--csmr-brand);
+  --background-highlight: #38202b;
+  --background-article-meta: #202a37;
+  --background-article-customer: #293544;
+  --background-article-customer-meta: #222d3b;
+  --border: #354151;
+  --border-alt: #425066;
+  --border-highlight: var(--csmr-focus);
+  --shadow-highlight: #63303d;
+  --border-article-customer: #435167;
+  --border-article-customer-selected: #596b83;
+  --tag-text: #e4e9f1;
+  --tag-background: #344154;
+  --fullscreen-background: #11151c;
+  --fullscreen-text: #c2cad6;
+  --fullscreen-text-link: #ff9ca4;
+  --fullscreen-text-muted: #aeb9c8;
+  --menu-text: #c2cad6;
+  --menu-text-active: #ffffff;
+  --menu-background-active: var(--csmr-brand);
+  --menu-background-primary: #0d1118;
+  --menu-background-secondary: #171d27;
+  --menu-icon: #aeb9c8;
+  --menu-close-tab-background: #1c232e;
+  --table-border: #425066;
+  --table-header-background: #1c232e;
+}
+html, body { background-color: var(--background-primary); }
+* { scrollbar-width: thin; scrollbar-color: #68778d #171d27; }
+*::-webkit-scrollbar { width: 10px; height: 10px; }
+*::-webkit-scrollbar-track { background: #171d27; }
+*::-webkit-scrollbar-thumb { background: #68778d; border: 2px solid #171d27; border-radius: 6px; }
+*::-webkit-scrollbar-thumb:hover { background: #8795a8; }
+.login .hero-unit, .signup .hero-unit, .password_reset .hero-unit {
+  background: var(--csmr-panel);
+  border: 1px solid var(--csmr-line);
+  border-top: 3px solid var(--csmr-brand);
+  border-radius: 14px;
+  box-shadow: 0 18px 48px rgba(0,0,0,.25);
+}
+.login .company-logo { width: 340px; max-width: 100%; max-height: 114px; height: auto; margin: 12px auto 26px; }
+.login .form-control { min-height: 44px; border-radius: 7px; }
+.login .btn { min-height: 44px; border-radius: 7px; font-weight: 600; }
+.login .formGroup-label label { color: #c2cad6; }
+.form-control { background-color: #141b25; border-color: #425066; color: var(--text-normal); }
+.form-control::placeholder { color: #aeb9c8; opacity: 1; }
+.form-control:focus { border-color: var(--csmr-focus); box-shadow: 0 0 0 2px rgba(255,142,150,.2); }
+a:focus-visible, button:focus-visible, input:focus-visible, select:focus-visible, [contenteditable]:focus-visible {
+  outline: 2px solid var(--csmr-focus); outline-offset: 2px;
+}
+.btn-primary { background-color: var(--csmr-brand); border-color: var(--csmr-brand); color: #ffffff; }
+.btn-primary:hover, .btn-primary:focus { background-color: var(--csmr-brand-hover); border-color: var(--csmr-brand-hover); color: #ffffff; }
+.btn:disabled, .btn.disabled { cursor: not-allowed; }
+.btn:not(:disabled):not(.disabled), a, [role="button"] { cursor: pointer; }
+#navigation { border-right: 1px solid #354151; }
+#navigation .search { border-bottom: 1px solid #354151; }
+#navigation .nav-tab.active { box-shadow: inset 3px 0 0 #ff9ca4; }
+.sidebar { border-left: 1px solid #354151; }
+h1, h2, h3 { font-weight: 600; }
+.table thead th { color: #c2cad6; }
+@media (max-width: 600px) {
+  .login .company-logo { width: 290px; }
+  .login .hero-unit { border-radius: 10px; }
+}
+@media (prefers-reduced-motion: reduce) {
+  .btn, .form-control, .nav-tab { transition: none; }
+}
+@media (forced-colors: active) {
+  * { scrollbar-color: auto; }
+  a:focus-visible, button:focus-visible, input:focus-visible, select:focus-visible { outline-color: Highlight; }
+}
+
+
+/* Preserve the native notifications button and counter; replace only its artwork. */
+#navigation .search .logo {
+  background-image: url('/assets/csmr-icon.png?v=2');
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: 38px 38px;
+}
+#navigation .search .logo > svg { visibility: hidden; }
