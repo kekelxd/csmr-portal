@@ -1,0 +1,24 @@
+services:
+  zammad-nginx:
+    volumes:
+      - ./theme/csmr-form.js:/opt/zammad/public/assets/csmr-form.js:ro
+      - ./theme/csmr-form.css:/opt/zammad/public/assets/csmr-form.css:ro
+      - ./theme/csmr-theme.css:/opt/zammad/public/assets/csmr-theme.css:ro
+      - ./theme/csmr-theme.conf:/etc/nginx/conf.d/csmr-theme.conf:ro
+      - ./theme/csmr-icon.png:/opt/zammad/public/assets/csmr-icon.png:ro
+      - ./theme/csmr-favicon.ico:/opt/zammad/public/favicon.ico:ro
+      - ./theme/csmr-icon.png:/opt/zammad/public/apple-touch-icon.png:ro
+      - ./theme/csmr-operations.js:/opt/zammad/public/assets/csmr-operations.js:ro
+      - ./theme/csmr-operations.css:/opt/zammad/public/assets/csmr-operations.css:ro
+
+  zammad-railsserver:
+    volumes:
+      - ./forms/csmr_portal.rb:/opt/zammad/config/initializers/csmr_portal.rb:ro
+
+  zammad-scheduler:
+    volumes:
+      - ./forms/csmr_portal.rb:/opt/zammad/config/initializers/csmr_portal.rb:ro
+
+  zammad-websocket:
+    volumes:
+      - ./forms/csmr_portal.rb:/opt/zammad/config/initializers/csmr_portal.rb:ro

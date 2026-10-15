@@ -1,0 +1,6 @@
+{
+  "subject": "Chamado recebido — #{ticket.title}",
+  "recipient": [
+    "article_last_sender"
+  ]
+}

@@ -1,0 +1,539 @@
+{
+  "attributes": [
+    {
+      "name": "csmr_descricao_iluminacao",
+      "display": "Descrição do ajuste de iluminação",
+      "data_type": "textarea",
+      "data_option": {
+        "maxlength": 10000,
+        "null": true,
+        "default": ""
+      },
+      "screens": {
+        "create_middle": {
+          "ticket.agent": {
+            "null": true
+          },
+          "ticket.customer": {
+            "null": true
+          }
+        },
+        "edit": {
+          "ticket.agent": {
+            "null": true
+          }
+        }
+      },
+      "position": 13,
+      "active": true
+    },
+    {
+      "name": "csmr_descricao_programacao",
+      "display": "Descrição da programação",
+      "data_type": "textarea",
+      "data_option": {
+        "maxlength": 10000,
+        "null": true,
+        "default": "",
+        "note": "Inclua horários, dias da semana e condições necessárias."
+      },
+      "screens": {
+        "create_middle": {
+          "ticket.agent": {
+            "null": true
+          },
+          "ticket.customer": {
+            "null": true
+          }
+        },
+        "edit": {
+          "ticket.agent": {
+            "null": true
+          }
+        }
+      },
+      "position": 14,
+      "active": true
+    },
+    {
+      "name": "csmr_local",
+      "display": "Local/VAV",
+      "data_type": "input",
+      "data_option": {
+        "type": "text",
+        "maxlength": 255,
+        "null": true,
+        "default": "",
+        "note": "Informe o pavimento, a sala ou a identificação da VAV. Exemplo: 12º pavimento — VAV 03."
+      },
+      "screens": {
+        "create_middle": {
+          "ticket.agent": {
+            "null": true
+          },
+          "ticket.customer": {
+            "null": true
+          }
+        },
+        "edit": {
+          "ticket.agent": {
+            "null": true
+          }
+        }
+      },
+      "position": 15,
+      "active": true
+    },
+    {
+      "name": "csmr_setpoint",
+      "display": "Temperatura desejada (°C)",
+      "data_type": "input",
+      "data_option": {
+        "type": "text",
+        "maxlength": 16,
+        "null": true,
+        "default": "",
+        "note": "Informe a temperatura em graus Celsius. Exemplo: 22,5."
+      },
+      "screens": {
+        "create_middle": {
+          "ticket.agent": {
+            "null": true
+          },
+          "ticket.customer": {
+            "null": true
+          }
+        },
+        "edit": {
+          "ticket.agent": {
+            "null": true
+          }
+        }
+      },
+      "position": 12,
+      "active": true
+    },
+    {
+      "name": "csmr_categoria",
+      "display": "Categoria da solicitação",
+      "data_type": "select",
+      "data_option": {
+        "default": "",
+        "nulloption": true,
+        "null": true,
+        "multiple": false,
+        "translate": false,
+        "maxlength": 100,
+        "options": {
+          "temperatura": "Ajuste de Temperatura",
+          "iluminacao": "Ajuste de Iluminação",
+          "programacao": "Programação Horária",
+          "outros": "Outros"
+        },
+        "historical_options": {
+          "temperatura": "Ajuste de Temperatura",
+          "iluminacao": "Ajuste de Iluminação",
+          "programacao": "Programação Horária",
+          "outros": "Outros"
+        }
+      },
+      "screens": {
+        "create_middle": {
+          "ticket.agent": {
+            "null": true
+          },
+          "ticket.customer": {
+            "null": true
+          }
+        },
+        "edit": {
+          "ticket.agent": {
+            "null": true
+          }
+        }
+      },
+      "position": 10,
+      "active": true
+    },
+    {
+      "name": "csmr_observacoes",
+      "display": "Observações adicionais",
+      "data_type": "textarea",
+      "data_option": {
+        "maxlength": 10000,
+        "null": true,
+        "default": ""
+      },
+      "screens": {},
+      "position": 16,
+      "active": true
+    },
+    {
+      "name": "csmr_tipo_temperatura",
+      "display": "Tipo de ajuste",
+      "data_type": "select",
+      "data_option": {
+        "default": "",
+        "nulloption": true,
+        "null": true,
+        "multiple": false,
+        "translate": false,
+        "maxlength": 100,
+        "options": {
+          "aquecer": "Aquecer",
+          "resfriar": "Resfriar"
+        },
+        "historical_options": {
+          "aquecer": "Aquecer",
+          "resfriar": "Resfriar"
+        },
+        "note": "Selecione Aquecer ou Resfriar."
+      },
+      "screens": {
+        "create_middle": {
+          "ticket.agent": {
+            "null": true
+          },
+          "ticket.customer": {
+            "null": true
+          }
+        },
+        "edit": {
+          "ticket.agent": {
+            "null": true
+          }
+        }
+      },
+      "position": 11,
+      "active": true
+    }
+  ],
+  "core_workflows": [
+    {
+      "name": "CSMR - 01 Campos condicionais",
+      "object": "Ticket",
+      "condition_saved": {},
+      "condition_selected": {},
+      "perform": {
+        "ticket.csmr_tipo_temperatura": {
+          "operator": "remove"
+        },
+        "ticket.csmr_setpoint": {
+          "operator": "remove"
+        },
+        "ticket.csmr_local": {
+          "operator": "remove"
+        },
+        "ticket.csmr_descricao_iluminacao": {
+          "operator": "remove"
+        },
+        "ticket.csmr_descricao_programacao": {
+          "operator": "remove"
+        },
+        "ticket.csmr_observacoes": {
+          "operator": "remove"
+        }
+      },
+      "preferences": {
+        "screen": [
+          "create_middle"
+        ]
+      },
+      "priority": 100,
+      "active": true,
+      "stop_after_match": false
+    },
+    {
+      "name": "CSMR - 02 Categoria obrigatória no portal",
+      "object": "Ticket",
+      "condition_saved": {},
+      "condition_selected": {
+        "session.role_ids": {
+          "operator": "is",
+          "value": [
+            "3"
+          ]
+        }
+      },
+      "perform": {
+        "ticket.csmr_categoria": {
+          "operator": "set_mandatory"
+        },
+        "ticket.group_id": {
+          "operator": "set_fixed_to",
+          "set_fixed_to": [
+            "2"
+          ]
+        }
+      },
+      "preferences": {
+        "screen": [
+          "create_middle"
+        ]
+      },
+      "priority": 110,
+      "active": true,
+      "stop_after_match": false
+    },
+    {
+      "name": "CSMR - 03 Categorias disponíveis na abertura",
+      "object": "Ticket",
+      "condition_saved": {},
+      "condition_selected": {},
+      "perform": {
+        "ticket.csmr_categoria": {
+          "operator": "set_fixed_to",
+          "set_fixed_to": [
+            "temperatura",
+            "outros"
+          ]
+        }
+      },
+      "preferences": {
+        "screen": [
+          "create_middle"
+        ]
+      },
+      "priority": 115,
+      "active": true,
+      "stop_after_match": false
+    },
+    {
+      "name": "CSMR - 20 temperatura",
+      "object": "Ticket",
+      "condition_saved": {},
+      "condition_selected": {
+        "ticket.csmr_categoria": {
+          "operator": "is",
+          "value": [
+            "temperatura"
+          ]
+        }
+      },
+      "perform": {
+        "ticket.csmr_tipo_temperatura": {
+          "operator": [
+            "show",
+            "set_mandatory"
+          ]
+        },
+        "ticket.csmr_setpoint": {
+          "operator": [
+            "show",
+            "set_mandatory"
+          ]
+        },
+        "ticket.csmr_local": {
+          "operator": [
+            "show",
+            "set_mandatory"
+          ]
+        },
+        "ticket.csmr_observacoes": {
+          "operator": "remove"
+        },
+        "ticket.csmr_descricao_iluminacao": {
+          "operator": [
+            "remove",
+            "fill_in"
+          ],
+          "fill_in": ""
+        },
+        "ticket.csmr_descricao_programacao": {
+          "operator": [
+            "remove",
+            "fill_in"
+          ],
+          "fill_in": ""
+        }
+      },
+      "preferences": {
+        "screen": [
+          "create_middle"
+        ]
+      },
+      "priority": 120,
+      "active": true,
+      "stop_after_match": false
+    },
+    {
+      "name": "CSMR - 21 iluminacao",
+      "object": "Ticket",
+      "condition_saved": {},
+      "condition_selected": {
+        "ticket.csmr_categoria": {
+          "operator": "is",
+          "value": [
+            "iluminacao"
+          ]
+        }
+      },
+      "perform": {
+        "ticket.csmr_descricao_iluminacao": {
+          "operator": [
+            "show",
+            "set_mandatory"
+          ]
+        },
+        "ticket.csmr_local": {
+          "operator": [
+            "show",
+            "set_mandatory"
+          ]
+        },
+        "ticket.csmr_observacoes": {
+          "operator": "remove"
+        },
+        "ticket.csmr_tipo_temperatura": {
+          "operator": [
+            "remove",
+            "fill_in"
+          ],
+          "fill_in": ""
+        },
+        "ticket.csmr_setpoint": {
+          "operator": [
+            "remove",
+            "fill_in"
+          ],
+          "fill_in": ""
+        },
+        "ticket.csmr_descricao_programacao": {
+          "operator": [
+            "remove",
+            "fill_in"
+          ],
+          "fill_in": ""
+        }
+      },
+      "preferences": {
+        "screen": [
+          "create_middle"
+        ]
+      },
+      "priority": 121,
+      "active": true,
+      "stop_after_match": false
+    },
+    {
+      "name": "CSMR - 22 programacao",
+      "object": "Ticket",
+      "condition_saved": {},
+      "condition_selected": {
+        "ticket.csmr_categoria": {
+          "operator": "is",
+          "value": [
+            "programacao"
+          ]
+        }
+      },
+      "perform": {
+        "ticket.csmr_descricao_programacao": {
+          "operator": [
+            "show",
+            "set_mandatory"
+          ]
+        },
+        "ticket.csmr_local": {
+          "operator": [
+            "show",
+            "set_mandatory"
+          ]
+        },
+        "ticket.csmr_observacoes": {
+          "operator": "remove"
+        },
+        "ticket.csmr_tipo_temperatura": {
+          "operator": [
+            "remove",
+            "fill_in"
+          ],
+          "fill_in": ""
+        },
+        "ticket.csmr_setpoint": {
+          "operator": [
+            "remove",
+            "fill_in"
+          ],
+          "fill_in": ""
+        },
+        "ticket.csmr_descricao_iluminacao": {
+          "operator": [
+            "remove",
+            "fill_in"
+          ],
+          "fill_in": ""
+        }
+      },
+      "preferences": {
+        "screen": [
+          "create_middle"
+        ]
+      },
+      "priority": 122,
+      "active": true,
+      "stop_after_match": false
+    },
+    {
+      "name": "CSMR - 23 outros",
+      "object": "Ticket",
+      "condition_saved": {},
+      "condition_selected": {
+        "ticket.csmr_categoria": {
+          "operator": "is",
+          "value": [
+            "outros"
+          ]
+        }
+      },
+      "perform": {
+        "ticket.csmr_local": {
+          "operator": [
+            "show",
+            "set_optional"
+          ]
+        },
+        "ticket.csmr_tipo_temperatura": {
+          "operator": [
+            "remove",
+            "fill_in"
+          ],
+          "fill_in": ""
+        },
+        "ticket.csmr_setpoint": {
+          "operator": [
+            "remove",
+            "fill_in"
+          ],
+          "fill_in": ""
+        },
+        "ticket.csmr_descricao_iluminacao": {
+          "operator": [
+            "remove",
+            "fill_in"
+          ],
+          "fill_in": ""
+        },
+        "ticket.csmr_descricao_programacao": {
+          "operator": [
+            "remove",
+            "fill_in"
+          ],
+          "fill_in": ""
+        },
+        "ticket.csmr_observacoes": {
+          "operator": "remove"
+        }
+      },
+      "preferences": {
+        "screen": [
+          "create_middle"
+        ]
+      },
+      "priority": 123,
+      "active": true,
+      "stop_after_match": false
+    }
+  ],
+  "template_sha256": "b5e7421fbd51603a1ea82914de5bba47d11cfaed8c1ab8d0f42555f29858d353"
+}
