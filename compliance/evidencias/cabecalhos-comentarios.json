@@ -1,0 +1,55 @@
+{
+  "timestamp": "2026-10-15T18:17:43.851500-03:00",
+  "files": [
+    {
+      "path": "local/forms/csmr_portal.rb",
+      "before_sha256": "9e433d156620e07d4484ff621dbc9eba22a7746deaec0ade48dc813285e35015",
+      "after_sha256": "d899b451a93d9e188b1e522261b547bf9e7e5e4499d224321637842327101eea",
+      "only_prefixed_comment": true,
+      "header_bytes": 786
+    },
+    {
+      "path": "local/theme/csmr-form.js",
+      "before_sha256": "59ece7cee30d5a63ba5aadb8fd45dfac6192038fbfc7efdeea024a28f4fa9d35",
+      "after_sha256": "f998aa5c42ad021ae8fa45e74c89b2ca55763be06be2aadc933eae941a05291b",
+      "only_prefixed_comment": true,
+      "header_bytes": 764
+    },
+    {
+      "path": "local/theme/csmr-form.css",
+      "before_sha256": "2cb60c015e8b020c9df89593615e893b49ed7c39b26a090181dacb185e2f8c4b",
+      "after_sha256": "94fd071b8b620bbebf189117a3981ee24b57fe1f71a739c7a24a181deffae9f2",
+      "only_prefixed_comment": true,
+      "header_bytes": 764
+    },
+    {
+      "path": "local/theme/csmr-operations.js",
+      "before_sha256": "7587a064219d3743bef9ea1a559be3030164ca180b24540b11190becf80062a9",
+      "after_sha256": "fe1bd1389046c570c4286c87507212c49ec50c1f3a68948cb56ffd1241bdd1cb",
+      "only_prefixed_comment": true,
+      "header_bytes": 764
+    },
+    {
+      "path": "local/theme/csmr-operations.css",
+      "before_sha256": "f0dfea9651d6c6816084a5e7197424e6c336bc671444fb670df1713f62bf7ad2",
+      "after_sha256": "edacac0ea2f77763f76560282cdf96434160a2e275fb3878be4cce1ca4afc3ba",
+      "only_prefixed_comment": true,
+      "header_bytes": 764
+    },
+    {
+      "path": "local/theme/csmr-theme.css",
+      "before_sha256": "326d86c8e3a93edb1c4dcfbdcafa51b69a568e62cc18d35fe4b51e79c0bd8c0a",
+      "after_sha256": "fd5d839bdf3bd0d35f1ded5b98b233ddd47e65b4f97d5d79916d800e94e7cdd9",
+      "only_prefixed_comment": true,
+      "header_bytes": 764
+    },
+    {
+      "path": "local/theme/csmr-theme.conf",
+      "before_sha256": "fac6e8593e5777b7d4e53b835095d5f331e9b10adc61803c78b29269ca8cc4aa",
+      "after_sha256": "26749252b84c8a15fe9f22407d251c561b3eb62e53d6e11be79c9d0efe9af35b",
+      "only_prefixed_comment": true,
+      "header_bytes": 786
+    }
+  ],
+  "design_identifier_updated": true
+}

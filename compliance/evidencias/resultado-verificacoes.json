@@ -1,0 +1,13 @@
+{
+  "licenca_original_intacta": true,
+  "copyright_dos_arquivos_originais_presentes_preservado_por_hash": true,
+  "arquivos_ativos_inalterados": 10,
+  "head_git_inalterado": true,
+  "patch_nao_aplicado": true,
+  "links_locais_existentes": true,
+  "teste_js": "6 cenários passaram",
+  "auditoria_ui": "strict: 0 achados",
+  "preview": "Página estática isolada validada em desktop e 390px, sem overflow horizontal; atalho de teclado funcionou.",
+  "limite_preview": "Rodapé integrado no aplicativo ativo não foi implantado nem validado; requer autorização e teste futuro.",
+  "datas": "14 e 15/10/2026 declaradas pelo responsável, não comprovadas por Git."
+}

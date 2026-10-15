@@ -1,0 +1,44 @@
+{
+  "timestamp": "2026-10-15T18:25:17.419654-03:00",
+  "image": "ghcr.io/zammad/zammad:7.2.2-0000",
+  "empty_database_seeded_from_upstream": true,
+  "internal_network": true,
+  "production_volumes_used": false,
+  "ports_published": false,
+  "outbound_email_configured": false,
+  "results": [
+    {
+      "result": "ok",
+      "attributes": 7,
+      "workflows": 7,
+      "group_resolved_by_name": true,
+      "customer_role_resolved_by_name": true,
+      "protected_record_counts_unchanged": true
+    },
+    {
+      "result": "ok",
+      "attributes": 7,
+      "workflows": 7,
+      "group_resolved_by_name": true,
+      "customer_role_resolved_by_name": true,
+      "protected_record_counts_unchanged": true
+    },
+    {
+      "test": "PASS",
+      "import_runs": 2,
+      "idempotent_configuration": true,
+      "protected_records_unchanged": true,
+      "non_original_group_id": true,
+      "proposed_initializer_resolves_group": true,
+      "decimal_normalization": true,
+      "no_test_ticket_saved": true,
+      "full_browser_reconstruction": false
+    }
+  ],
+  "limitations": [
+    "Pilha Compose completa e browser não validados",
+    "Rodapé nas telas reais não validado",
+    "SLA/calendário e busca não reconstruídos",
+    "SMTP/OAuth não testados"
+  ]
+}

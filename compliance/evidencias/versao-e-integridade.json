@@ -1,0 +1,31 @@
+{
+  "application_version": "7.2.2",
+  "installed_version": "7.2.2-295796a2.docker",
+  "upstream_tag": "7.2.2",
+  "upstream_commit": "295796a2df0b38a579846c017383835657687a22",
+  "image": "ghcr.io/zammad/zammad:7.2.2-0000",
+  "image_id": "sha256:17dec4f83fc18bad7195d7d44df8dca35e04df882e6315385adf230ea759a614",
+  "deployment_repository": "https://github.com/zammad/zammad-docker-compose.git",
+  "deployment_commit": "b51cba16ab6d753efcb6676a30afaf97753b72cb",
+  "deployment_license_sha256": "57c8ff33c9c0cfc3ef00e650a1cc910d7ee479a8bc509f6c9209a7c2a11399d6",
+  "application_license_sha256": "8486a10c4393cee1c25392769ddd3b2d6c242d6ec7928e1414efff7dfb2f07ef",
+  "active_customization_sha256": {
+    "local/theme/csmr-theme.css": "fd5d839bdf3bd0d35f1ded5b98b233ddd47e65b4f97d5d79916d800e94e7cdd9",
+    "local/theme/csmr-theme.conf": "26749252b84c8a15fe9f22407d251c561b3eb62e53d6e11be79c9d0efe9af35b",
+    "local/theme/csmr-icon.png": "c6690cbb3a7628b1739acb1958005be1cfafd62cf145eb084aea0abf165695d4",
+    "local/theme/csmr-favicon.ico": "ee7d5fb52b350d080898bfae958417e5be6f7782a2f53b43081c2eeba2fccc75",
+    "local/theme/csmr-form.js": "f998aa5c42ad021ae8fa45e74c89b2ca55763be06be2aadc933eae941a05291b",
+    "local/theme/csmr-form.css": "94fd071b8b620bbebf189117a3981ee24b57fe1f71a739c7a24a181deffae9f2",
+    "local/theme/csmr-operations.js": "fe1bd1389046c570c4286c87507212c49ec50c1f3a68948cb56ffd1241bdd1cb",
+    "local/theme/csmr-operations.css": "edacac0ea2f77763f76560282cdf96434160a2e275fb3878be4cce1ca4afc3ba",
+    "local/forms/csmr_portal.rb": "d899b451a93d9e188b1e522261b547bf9e7e5e4499d224321637842327101eea",
+    "docker-compose.override.yml": "6a47d482c5af639f6d0306640f95aaa139298b6c81a16d3d68c83047f4b979a6"
+  },
+  "date_provenance": "14 e 15/10/2026 são referências informadas pelo responsável; não comprovadas por commits locais.",
+  "custom_git_history": "A CONFIRMAR — personalizações não versionadas no repositório de implantação.",
+  "usage": "Equipe interna e clientes externos via portal — confirmado pelo responsável.",
+  "source_repository_url": "https://github.com/kekelxd/zammadcsmr",
+  "source_repository_ref": null,
+  "source_repository_visibility_observed": "private",
+  "source_repository_visibility_requested": "private"
+}

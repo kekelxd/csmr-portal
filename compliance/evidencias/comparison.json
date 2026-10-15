@@ -1,0 +1,23 @@
+{
+  "upstream_tag": "7.2.2",
+  "upstream_commit": "295796a2df0b38a579846c017383835657687a22",
+  "upstream_files": 13986,
+  "equal": 9286,
+  "modified": [
+    {
+      "path": "VERSION",
+      "upstream_sha256": "b9e2168d6923b52f481fb5b10042c3f78eab6039795feaf46d043b1d6f1b3927",
+      "installed_sha256": "dd3379f710db158c81daf0b88149634d5ccfaa1ef52d03c53994d04eb769c139"
+    }
+  ],
+  "extra_source_paths": [
+    "app/assets/builds/knowledge_base.css",
+    "app/assets/builds/print.css",
+    "app/assets/builds/zammad.css",
+    "config/initializers/csmr_portal.rb",
+    "db/schema.rb"
+  ],
+  "missing_count": 4699,
+  "original_report_sha256": "fcc26034455f16209fddf5367afc6a3be95dc766dd81b1c2538c71833d94ed87",
+  "note": "Listas extensas de caminhos de fixtures upstream omitidas nesta cópia; relatório completo na revisão local."
+}

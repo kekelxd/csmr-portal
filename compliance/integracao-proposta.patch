@@ -1,0 +1,22 @@
+--- a/theme/csmr-theme.conf
++++ b/theme/csmr-theme.conf
+@@ -13,5 +13,8 @@
+ #  the maintainer; historical Git dates are unconfirmed.
+ # See CHANGELOG-MODIFICACOES.md.
+ # Local SMART / CSMR theme and icon assets.
+-sub_filter '</head>' '<link rel="stylesheet" href="/assets/csmr-theme.css?v=2"><link rel="icon" type="image/png" sizes="192x192" href="/assets/csmr-icon.png?v=2"><link rel="stylesheet" href="/assets/csmr-operations.css?v=2"><script defer src="/assets/csmr-operations.js?v=2"></script><link rel="stylesheet" href="/assets/csmr-form.css?v=5"><script defer src="/assets/csmr-form.js?v=6"></script></head>';
++sub_filter '</head>' '<link rel="stylesheet" href="/assets/csmr-theme.css?v=2"><link rel="stylesheet" href="/sobre-e-licencas/footer.css"><link rel="icon" type="image/png" sizes="192x192" href="/assets/csmr-icon.png?v=2"><link rel="stylesheet" href="/assets/csmr-operations.css?v=2"><script defer src="/assets/csmr-operations.js?v=2"></script><link rel="stylesheet" href="/assets/csmr-form.css?v=5"><script defer src="/assets/csmr-form.js?v=6"></script></head>';
+ sub_filter_once on;
++
++# Proposed only: attribution link in full HTML application pages.
++sub_filter '</body>' '<footer class="smart-license-footer"><a href="/sobre-e-licencas/" target="_blank" rel="noopener">Sobre e licenças</a></footer></body>';
+--- a/docker-compose.override.yml
++++ b/docker-compose.override.yml
+@@ -1,6 +1,7 @@
+ services:
+   zammad-nginx:
+     volumes:
++      - ./compliance/portal:/opt/zammad/public/sobre-e-licencas:ro
+       - ./theme/csmr-form.js:/opt/zammad/public/assets/csmr-form.js:ro
+       - ./theme/csmr-form.css:/opt/zammad/public/assets/csmr-form.css:ro
+       - ./theme/csmr-theme.css:/opt/zammad/public/assets/csmr-theme.css:ro
